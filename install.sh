@@ -10,6 +10,7 @@ cd "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 script_dir_parent=${PWD##*/}
 
+
 main() {
 	isrootuser
 	setup_script ${script_dir_parent}
@@ -18,10 +19,28 @@ main() {
 			uninstall
 			;;
 		*)
-			install	
+			install
 			;;
 	esac
 	exit 0
+}
+
+
+install() {
+	set_network_interface
+	blacklist_unneeded_modules
+	remove_floppy_mount
+	disable_unneeded_services
+	set_etc_default_s
+	remove_modules
+	install_packages
+	uninstall_packages
+	unload_modules
+	reconfigure_linux_image
+}
+
+uninstall() {
+	true
 }
 
 
@@ -57,22 +76,12 @@ _e() {
 }
 
 set_network_interface() {
-
-}
-
-blacklist_unneeded_modules() {
-
-}
-
-remove_floppy_mount() {
-	
-}
-install() {
-
 	_b ">> Install custom network interface"
 		install -o root -m 644 conf/interfaces /etc/network/interfaces
 	_e $?
+}
 
+blacklist_unneeded_modules() {
 	-b ">> blacklist unneeded modules"
 		install -o root -m 644 conf/blacklist_bySabi.conf /etc/modprobe.d/blacklist_bySabi.conf
 	_e $?
@@ -83,23 +92,33 @@ install() {
 			cat conf/blacklist-server_bySabi.conf >> /etc/modprobe.d/blacklist_bySabi.conf
 		_e $?
 	fi
+}
 
+remove_floppy_mount() {
 	-b ">> remove floppy from mount"
 		sed -i '/^\/dev\/fd/d' /etc/fstab
-	_e $?
+	_e $?	
+}
 
+disable_unneeded_services() {
 	-b ">> disable unneeded services on init"
 		source conf/unneeded-services-on-init
-	_e $?	
+	_e $?
+}
 
+set_etc_default_s() {
 	-b ">> set /etc/default of some unneeded services"
 		source conf/set-etc-default
-	_e $?	
+	_e $?
+}
 
+remove_modules() {
 	-b ">> remove no needed modules"
 		sed -i '/lp/d' /etc/modules
-	_e $?	
+	_e $?
+}
 
+install_packages() {
 	-b ">> install packages"
 		source conf/package-needed
 	_e $?
@@ -108,22 +127,25 @@ install() {
 	then
 		true
 	fi
+}
 
+uninstall_packages() {
 	-b ">> unistall packages"
 		source conf/package-unneeded
-	_e $?	
+	_e $?
+}
 
+unload_modules() {
 	-b ">> unload modules"
 		source conf/unload-modules
 	_e $?
+}
 
-	-b ">> reconfigure linux-image"	
+reconfigure_linux_image(){
+	-b ">> reconfigure linux-image"
 		dpkg-reconfigure linux-image-$(uname -r)
 	_e $?
 }
 
-uninstall() {
-	true
-}
 
 main "$@"
