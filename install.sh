@@ -55,10 +55,16 @@ setup_script() {
 	if [ "$1" != ${project_dir} ]; then
 		if ! which git > /dev/null
 		then
-			apt-get install -y --no-install-recommends git
+			echo ">> Install git"
+				apt-get install -y --no-install-recommends git 1>/dev/null
+			exit_func $?
 		fi
-		git clone https://github.com/bySabi/my_custom_ubuntu_vm.git
+		echo ">> clone \"${project_dir}\" repo"
+			git clone https://github.com/bySabi/my_custom_ubuntu_vm.git
+		exit_func $?
 		cd ${project_dir}
+		./install.sh &
+		exit 0
 	fi
 }
 
