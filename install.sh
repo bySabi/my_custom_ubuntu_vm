@@ -62,66 +62,62 @@ setup_script() {
 	fi
 }
 
-_b() {
-	echo ${1}
-}
-_e() {
+exit_func() {
 	local _exitcode=${1}
 	if [ $_exitcode == 0 ]; then 
 		echo -e "\e[00;32mOK\e[00m "
 	else 
 		echo -e "\e[00;31mFAIL\e[00m"
 	fi
-	echo
 }
 
 set_network_interface() {
-	_b ">> Install custom network interface"
+	echo ">> Install custom network interface"
 		install -o root -m 644 conf/interfaces /etc/network/interfaces
-	_e $?
+	exit_func $?
 }
 
 blacklist_unneeded_modules() {
-	-b ">> blacklist unneeded modules"
+	echo ">> blacklist unneeded modules"
 		install -o root -m 644 conf/blacklist_bySabi.conf /etc/modprobe.d/blacklist_bySabi.conf
-	_e $?
+	exit_func $?
 	## if not desktop ->
 	if ! dpkg -l ubuntu-desktop 1>/dev/null 2>&1
 	then
-		-b ">> blacklist unneeded modules - server only"
+		echo ">> blacklist unneeded modules - server only"
 			cat conf/blacklist-server_bySabi.conf >> /etc/modprobe.d/blacklist_bySabi.conf
-		_e $?
+		exit_func $?
 	fi
 }
 
 remove_floppy_mount() {
-	-b ">> remove floppy from mount"
+	echo ">> remove floppy from mount"
 		sed -i '/^\/dev\/fd/d' /etc/fstab
-	_e $?	
+	exit_func $?	
 }
 
 disable_unneeded_services() {
-	-b ">> disable unneeded services on init"
+	echo ">> disable unneeded services on init"
 		source conf/unneeded-services-on-init
-	_e $?
+	exit_func $?
 }
 
 set_etc_default_s() {
-	-b ">> set /etc/default of some unneeded services"
+	echo ">> set /etc/default of some unneeded services"
 		source conf/set-etc-default
-	_e $?
+	exit_func $?
 }
 
 remove_modules() {
-	-b ">> remove no needed modules"
+	echo ">> remove no needed modules"
 		sed -i '/lp/d' /etc/modules
-	_e $?
+	exit_func $?
 }
 
 install_packages() {
-	-b ">> install packages"
+	echo ">> install packages"
 		source conf/package-needed
-	_e $?
+	exit_func $?
 	## if desktop ->
 	if dpkg -l ubuntu-desktop 1>/dev/null 2>&1
 	then
@@ -130,21 +126,21 @@ install_packages() {
 }
 
 uninstall_packages() {
-	-b ">> unistall packages"
+	echo ">> unistall packages"
 		source conf/package-unneeded
-	_e $?
+	exit_func $?
 }
 
 unload_modules() {
-	-b ">> unload modules"
+	echo ">> unload modules"
 		source conf/unload-modules
-	_e $?
+	exit_func $?
 }
 
 reconfigure_linux_image(){
-	-b ">> reconfigure linux-image"
+	echo ">> reconfigure linux-image"
 		dpkg-reconfigure linux-image-$(uname -r)
-	_e $?
+	exit_func $?
 }
 
 
