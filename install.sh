@@ -28,22 +28,21 @@ main() {
 
 install() {
 	set_network_interface
-	blacklist_unneeded_modules
-	remove_floppy_mount
-	disable_unneeded_services
-	set_etc_default_s
-	remove_modules
-	install_packages
-	uninstall_packages
-	unload_modules
-	reconfigure_linux_image
+#	blacklist_unneeded_modules
+#	remove_floppy_mount
+#	disable_unneeded_services
+#	set_etc_default_s
+#	remove_modules
+#	install_packages
+#	uninstall_packages
+#	unload_modules
+#	reconfigure_linux_image
 }
 
 set_network_interface() {
 	echo ">> Install custom network interface"
-		true
-		#install -o root -m 644 conf/interfaces /etc/network/interfaces
-	exit_func $?
+		install -o root -m 644 conf/interfaces /etc/network/interfaces
+#	exit_func $?
 }
 
 blacklist_unneeded_modules() {
