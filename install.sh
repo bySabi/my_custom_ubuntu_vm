@@ -14,18 +14,7 @@ script_dir_parent=${PWD##*/}
 main() {
 	isrootuser
 	setup_script ${script_dir_parent}
-	case ${1} in
-		unistall)
-			uninstall
-			;;
-		*)
-			install
-			;;
-	esac
-}
 
-
-install() {
 	set_network_interface
 #	blacklist_unneeded_modules
 #	remove_floppy_mount
@@ -41,7 +30,7 @@ install() {
 set_network_interface() {
 	echo ">> Install custom network interface"
 		install -o root -m 644 conf/interfaces /etc/network/interfaces
-#	exit_func $?
+	exit_func $?
 }
 
 blacklist_unneeded_modules() {
@@ -108,10 +97,6 @@ reconfigure_linux_image(){
 	echo ">> reconfigure linux-image"
 		dpkg-reconfigure linux-image-$(uname -r)
 	exit_func $?
-}
-
-uninstall() {
-	true
 }
 
 
