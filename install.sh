@@ -136,15 +136,15 @@ setup_script() {
 			git clone https://github.com/bySabi/my_custom_ubuntu_vm.git
 		exit_func $?
 		cd ${project_dir}
-		sudo sh install.sh &
+		chmod +x install.sh && sudo ./install.sh &
 		exit 0
 	fi
 }
 
 exit_func() {
-	local _exitcode=${1}
-	if [ $_exitcode == 0 ]; then 
-		echo -e "\e[00;32mOK\e[00m "
+	local exitcode=${1}
+	if [ $exitcode == 0 ]; then 
+		echo -e "\e[00;32mOK\e[00m"
 	else 
 		echo -e "\e[00;31mFAIL\e[00m"
 	fi
