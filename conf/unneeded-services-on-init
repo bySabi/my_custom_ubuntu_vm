@@ -1,0 +1,16 @@
+[ -f /etc/init/apparmor.conf ] && echo "manual" | tee /etc/init/apparmor.override
+[ -f /etc/init/apport.conf ] && echo "manual" | tee /etc/init/apport.override
+[ -f /etc/init/avahi-daemon.conf ] && echo "manual" | tee /etc/init/avahi-daemon.override
+[ -f /etc/init/bluetooth.conf ] && echo "manual" | tee /etc/init/bluetooth.override
+[ -f /etc/init/cups.conf ] && echo "manual" | tee /etc/init/cups.override
+[ -f /etc/init/modemmanager.conf ] && echo "manual" | tee /etc/init/modemmanager.override
+[ -f /etc/init/network-manager.conf ] && echo "manual" | tee /etc/init/network-manager.override
+[ -f /etc/init/pppd-dns.conf ] && echo "manual" | tee /etc/init/pppd-dns.override
+[ -f /etc/init/pulseaudio.conf ] && echo "manual" | tee /etc/init/pulseaudio.override
+[ -f /etc/init/ufw.conf ] && echo "manual" | tee /etc/init/ufw.override
+[ -f /etc/init/whoopsie.conf ] && echo "manual" | tee /etc/init/whoopsie.override
+echo "manual" | tee /etc/init/vmware-tools-thinprint.override
+[ -f /etc/init/tty3.conf ] && echo "manual" | tee /etc/init/tty3.override
+[ -f /etc/init/tty4.conf ] && echo "manual" | tee /etc/init/tty4.override
+[ -f /etc/init/tty5.conf ] && echo "manual" | tee /etc/init/tty5.override
+[ -f /etc/init/tty6.conf ] && echo "manual" | tee /etc/init/tty6.override
