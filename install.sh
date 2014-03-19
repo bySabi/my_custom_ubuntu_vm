@@ -16,15 +16,15 @@ main() {
 	setup_script ${script_dir_parent}
 
 	set_network_interface
-#	blacklist_unneeded_modules
-#	remove_floppy_mount
-#	disable_unneeded_services
-#	set_etc_default_s
-#	remove_modules
-#	install_packages
-#	uninstall_packages
-#	unload_modules
-#	reconfigure_linux_image
+	blacklist_unneeded_modules
+	remove_floppy_mount
+	disable_unneeded_services
+	set_etc_default_s
+	remove_modules
+	install_packages
+	uninstall_packages
+	unload_modules
+	reconfigure_linux_image
 }
 
 set_network_interface() {
