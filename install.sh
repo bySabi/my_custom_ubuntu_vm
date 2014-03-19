@@ -22,7 +22,6 @@ main() {
 			install
 			;;
 	esac
-	exit 0
 }
 
 
