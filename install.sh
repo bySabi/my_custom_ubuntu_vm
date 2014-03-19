@@ -63,7 +63,7 @@ setup_script() {
 			git clone https://github.com/bySabi/my_custom_ubuntu_vm.git
 		exit_func $?
 		cd ${project_dir}
-		./install.sh &
+		sudo sh install.sh &
 		exit 0
 	fi
 }
