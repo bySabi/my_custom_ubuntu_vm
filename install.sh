@@ -135,3 +135,4 @@ exit_func() {
 
 
 main "$@"
+exit 0
