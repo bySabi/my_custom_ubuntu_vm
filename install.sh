@@ -23,7 +23,7 @@ main() {
 	remove_modules
 	install_packages
 	uninstall_packages
-	unload_modules
+	#unload_modules
 	reconfigure_linux_image
 }
 
