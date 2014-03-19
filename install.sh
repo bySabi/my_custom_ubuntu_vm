@@ -39,47 +39,10 @@ install() {
 	reconfigure_linux_image
 }
 
-uninstall() {
-	true
-}
-
-
-isrootuser() {
-	[ $(id -u) = 0 ] || {
-		echo "This script must be run as root" 1>&2
-		exit 1
-	}
-}
-
-setup_script() {
-	if [ "$1" != ${project_dir} ]; then
-		if ! which git > /dev/null
-		then
-			echo ">> Install git"
-				apt-get install -y --no-install-recommends git 1>/dev/null
-			exit_func $?
-		fi
-		echo ">> clone \"${project_dir}\" repo"
-			git clone https://github.com/bySabi/my_custom_ubuntu_vm.git
-		exit_func $?
-		cd ${project_dir}
-		sudo sh install.sh &
-		exit 0
-	fi
-}
-
-exit_func() {
-	local _exitcode=${1}
-	if [ $_exitcode == 0 ]; then 
-		echo -e "\e[00;32mOK\e[00m "
-	else 
-		echo -e "\e[00;31mFAIL\e[00m"
-	fi
-}
-
 set_network_interface() {
 	echo ">> Install custom network interface"
-		install -o root -m 644 conf/interfaces /etc/network/interfaces
+		true
+		#install -o root -m 644 conf/interfaces /etc/network/interfaces
 	exit_func $?
 }
 
@@ -147,6 +110,44 @@ reconfigure_linux_image(){
 	echo ">> reconfigure linux-image"
 		dpkg-reconfigure linux-image-$(uname -r)
 	exit_func $?
+}
+
+uninstall() {
+	true
+}
+
+
+isrootuser() {
+	[ $(id -u) = 0 ] || {
+		echo "This script must be run as root" 1>&2
+		exit 1
+	}
+}
+
+setup_script() {
+	if [ "$1" != ${project_dir} ]; then
+		if ! which git > /dev/null
+		then
+			echo ">> Install git"
+				apt-get install -y --no-install-recommends git 1>/dev/null
+			exit_func $?
+		fi
+		echo ">> clone \"${project_dir}\" repo"
+			git clone https://github.com/bySabi/my_custom_ubuntu_vm.git
+		exit_func $?
+		cd ${project_dir}
+		sudo sh install.sh &
+		exit 0
+	fi
+}
+
+exit_func() {
+	local _exitcode=${1}
+	if [ $_exitcode == 0 ]; then 
+		echo -e "\e[00;32mOK\e[00m "
+	else 
+		echo -e "\e[00;31mFAIL\e[00m"
+	fi
 }
 
 
