@@ -116,7 +116,7 @@ setup_script() {
 			exit_func $?
 		fi
 		echo ">> clone \"${project_dir}\" repo"
-			git clone https://github.com/bySabi/my_custom_ubuntu_vm.git
+			git clone https://github.com/bySabi/${project_dir}.git
 		exit_func $?
 		cd ${project_dir}
 		chmod +x install.sh && sudo ./install.sh &
