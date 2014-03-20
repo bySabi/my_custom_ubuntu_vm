@@ -2,4 +2,4 @@ apt-get update && apt-get upgrade -y -q --no-install-recommends && apt-get dist-
 
 apt-get install -y --no-install-recommends \
 	nano bash-completion mc htop \
-	gcc make
+	make build-essential
