@@ -72,7 +72,7 @@ remove_modules() {
 
 install_packages() {
 	echo ">> install packages"
-		source conf/package-needed
+		source conf/package-needed 1>/dev/null
 	exit_func $?
 	## if desktop ->
 	if dpkg -l ubuntu-desktop 1>/dev/null 2>&1
@@ -83,7 +83,7 @@ install_packages() {
 
 uninstall_packages() {
 	echo ">> unistall packages"
-		source conf/package-unneeded
+		source conf/package-unneeded 1>/dev/null
 	exit_func $?
 }
 
@@ -95,7 +95,7 @@ unload_modules() {
 
 reconfigure_linux_image(){
 	echo ">> reconfigure linux-image"
-		dpkg-reconfigure linux-image-$(uname -r)
+		dpkg-reconfigure linux-image-$(uname -r) 1>/dev/null
 	exit_func $?
 }
 
