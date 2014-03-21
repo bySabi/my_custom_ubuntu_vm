@@ -112,7 +112,7 @@ setup_script() {
 		if ! which git > /dev/null
 		then
 			echo ">> Install git"
-				apt-get install -y --no-install-recommends git 1>/dev/null
+				apt-get update && apt-get install -y --no-install-recommends git 1>/dev/null
 			exit_func $?
 		fi
 		echo ">> clone \"${project_dir}\" repo"
