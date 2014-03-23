@@ -30,6 +30,7 @@ main() {
 set_network_interface() {
 	echo ">> Install custom network interface"
 		install -o root -m 644 conf/interfaces /etc/network/interfaces
+		echo "Default IP: \e[00;25m192.168.0.199\e[00m ... change before restart"
 	exit_func $?
 }
 
