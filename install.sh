@@ -73,7 +73,7 @@ remove_modules() {
 
 install_packages() {
 	echo ">> install packages"
-		source conf/package-needed 1>/dev/null
+		source conf/package-needed
 	exit_func $?
 	## if desktop ->
 	if dpkg -l ubuntu-desktop 1>/dev/null 2>&1
@@ -84,7 +84,7 @@ install_packages() {
 
 uninstall_packages() {
 	echo ">> unistall packages"
-		source conf/package-unneeded 1>/dev/null
+		source conf/package-unneeded
 	exit_func $?
 }
 

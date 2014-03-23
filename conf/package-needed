@@ -1,4 +1,6 @@
-apt-get update && apt-get upgrade -y -q --no-install-recommends && apt-get dist-upgrade -y -q --no-install-recommends
+apt-get update 1>/dev/null
+apt-get upgrade -y -q --no-install-recommends
+apt-get dist-upgrade -y -q --no-install-recommends
 
 apt-get install -y --no-install-recommends \
 	nano bash-completion mc htop \
