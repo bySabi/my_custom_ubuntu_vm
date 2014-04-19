@@ -25,6 +25,8 @@ main() {
 	uninstall_packages
 	#unload_modules
 	reconfigure_linux_image
+	install_vmware_tools
+	set_interface_vmxnet3
 }
 
 set_network_interface() {
@@ -97,6 +99,16 @@ unload_modules() {
 reconfigure_linux_image(){
 	echo ">> reconfigure linux-image"
 		dpkg-reconfigure linux-image-$(uname -r) 1>/dev/null
+	exit_func $?
+}
+
+install_vmware_tools(){
+	echo ">> install vmware tools"
+	exit_func $?
+}
+
+set_interface_vmxnet3(){
+	echo -e ">> edit .vmx file and change \"e1000\" to \e[00;5m\"vmxnet\"\e[00m"
 	exit_func $?
 }
 
