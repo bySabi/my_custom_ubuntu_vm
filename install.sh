@@ -1,6 +1,5 @@
 #!/bin/bash
 set -e
-set +x
 
 project_dir="my_custom_ubuntu_vm"
 
@@ -120,20 +119,24 @@ isrootuser() {
 	}
 }
 
+install_git() {
+	echo ">> Install git"
+		source conf/install-git
+	exit_func $?
+}
+
 setup_script() {
 	if [ "$1" != ${project_dir} ]; then
 		if ! which git > /dev/null
 		then
-			echo ">> Install git"
-				apt-get update && apt-get install -y --no-install-recommends git 1>/dev/null
-			exit_func $?
+			install_git
 		fi
 		echo ">> clone \"${project_dir}\" repo"
 			[ -d ${project_dir} ] && rm -fr ${project_dir}
 			git clone https://github.com/bySabi/${project_dir}.git
 		exit_func $?
 		cd ${project_dir}
-		chmod +x install.sh && ./install.sh
+		chmod +x $(basename "$0") &&  ./$(basename "$0") "$*"
 		exit 0
 	fi
 }
