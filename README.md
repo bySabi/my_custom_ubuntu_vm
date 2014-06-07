@@ -3,7 +3,7 @@ my custom ubuntu vm
 
 Download:
 ```
-curl -L -o /tmp/install.sh https://raw.github.com/bySabi/my_custom_ubuntu_vm/master/install.sh
+wget -O /tmp/install.sh https://raw.github.com/bySabi/my_custom_ubuntu_vm/master/install.sh
 ```
 
 Install on Server
