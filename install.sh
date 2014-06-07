@@ -107,7 +107,7 @@ install_vmware_tools(){
 }
 
 set_interface_vmxnet3(){
-	echo -e ">> edit .vmx file and change \"e1000\" to \e[00;5m\"vmxnet\"\e[00m"
+	echo -e ">> edit .vmx file and change \"e1000\" to \e[00;5m\"vmxnet3\"\e[00m"
 	exit_func $?
 }
 
