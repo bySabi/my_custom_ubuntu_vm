@@ -9,7 +9,7 @@ cd "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 script_dir_parent=${PWD##*/}
 
-main1() {
+main() {
 	isrootuser
 	setup_script ${script_dir_parent}
 	blacklist_unneeded_modules "$@"
