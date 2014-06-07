@@ -121,7 +121,7 @@ isrootuser() {
 
 install_git() {
 	echo ">> Install git"
-		source conf/install-git
+		apt-get update && apt-get install -y --no-install-recommends git 1>/dev/null
 	exit_func $?
 }
 
