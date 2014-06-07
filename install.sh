@@ -11,7 +11,7 @@ script_dir_parent=${PWD##*/}
 
 main() {
 	isrootuser
-	setup_script ${script_dir_parent}
+	setup_script ${script_dir_parent} "$@"
 	blacklist_unneeded_modules "$@"
 }
 
@@ -140,6 +140,8 @@ install_git() {
 
 setup_script() {
 	if [ "$1" != ${project_dir} ]; then
+		shift
+echo "basename: $0"
 		if ! which git > /dev/null
 		then
 			install_git
