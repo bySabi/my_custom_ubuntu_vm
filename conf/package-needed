@@ -5,4 +5,5 @@ apt-get dist-upgrade -y -q --no-install-recommends
 apt-get install -y --no-install-recommends \
 	curl nano bash-completion mc htop \
 	make build-essential \
+	aptitude \
 	libssl-dev
