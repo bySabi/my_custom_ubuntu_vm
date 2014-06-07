@@ -9,15 +9,10 @@ cd "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 script_dir_parent=${PWD##*/}
 
+
 main() {
 	isrootuser
 	setup_script ${script_dir_parent} "$@"
-	blacklist_unneeded_modules "$@"
-}
-
-main1() {
-	isrootuser
-	setup_script ${script_dir_parent}
 
 	set_network_interface
 	blacklist_unneeded_modules "$@"
@@ -40,7 +35,7 @@ set_network_interface() {
 	exit_func $?
 }
 
-blacklist_unneeded_modules1() {
+blacklist_unneeded_modules() {
 	echo ">> blacklist unneeded modules"
 		install -o root -m 644 conf/blacklist_bySabi.conf /etc/modprobe.d/blacklist_bySabi.conf
 	exit_func $?
@@ -50,14 +45,6 @@ blacklist_unneeded_modules1() {
 		echo ">> blacklist unneeded modules - server only"
 			cat conf/blacklist-server_bySabi.conf >> /etc/modprobe.d/blacklist_bySabi.conf
 		exit_func $?
-	fi
-}
-
-blacklist_unneeded_modules() {
-	echo "1:${1}  2:${2}" 
-	if [ "${1}" != "desktop" ]
-	then
-		echo ">> desktop"
 	fi
 }
 
@@ -141,7 +128,6 @@ install_git() {
 setup_script() {
 	if [ "$1" != ${project_dir} ]; then
 		shift
-echo "basename: $0"
 		if ! which git > /dev/null
 		then
 			install_git
