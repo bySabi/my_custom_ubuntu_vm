@@ -15,12 +15,12 @@ main() {
 	setup_script ${script_dir_parent}
 
 	set_network_interface
-	blacklist_unneeded_modules
+	blacklist_unneeded_modules "$@"
 	remove_floppy_mount
-	disable_unneeded_services
+	disable_unneeded_services "$@"
 	set_etc_default_s
-	remove_modules
-	install_packages
+	remove_modules "$@"
+	install_packages "$@"
 	uninstall_packages
 	#unload_modules
 	reconfigure_linux_image
@@ -40,7 +40,7 @@ blacklist_unneeded_modules() {
 		install -o root -m 644 conf/blacklist_bySabi.conf /etc/modprobe.d/blacklist_bySabi.conf
 	exit_func $?
 	## if not desktop ->
-	if ! dpkg -l ubuntu-desktop 1>/dev/null 2>&1
+	if [ "${1}" != "desktop" ]
 	then
 		echo ">> blacklist unneeded modules - server only"
 			cat conf/blacklist-server_bySabi.conf >> /etc/modprobe.d/blacklist_bySabi.conf
@@ -77,7 +77,7 @@ install_packages() {
 		source conf/package-needed
 	exit_func $?
 	## if desktop ->
-	if dpkg -l ubuntu-desktop 1>/dev/null 2>&1
+	if [ "${1}" == "desktop" ]
 	then
 		true
 	fi
