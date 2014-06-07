@@ -54,7 +54,7 @@ blacklist_unneeded_modules1() {
 }
 
 blacklist_unneeded_modules() {
-	echo "${1}"
+	echo "1:${1}  2:${2}" 
 	if [ "${1}" != "desktop" ]
 	then
 		echo ">> desktop"
